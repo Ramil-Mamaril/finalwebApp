@@ -415,7 +415,7 @@ p {
 
 /* The Modal (background) */
 .modal {
-
+  display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 999999; /* Sit on top */
   padding-top: 100px; /* Location of the box */
@@ -423,8 +423,9 @@ p {
   top: 0;
   width: 100%; /* Full width */
   height: 100%; /* Full height */
-  overflow:hidden ; /* Enable scroll if needed */
-
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
 /* Modal Content */
@@ -445,7 +446,7 @@ p {
 
 /* Add Animation */
 @-webkit-keyframes animatetop {
-  from {top:-300px; opacity:0}
+  from {top:-300px; opacity:0} 
   to {top:0; opacity:1}
 }
 
@@ -495,20 +496,20 @@ p {
 
 
 .button{
-
-  padding: 10px 10px;
+  margin-top: 10px;
+  padding: 10px 30px;
   font-size: 20px;
   font-weight: 500;
   border: none;
   outline: none;
   background: #fff;
-  color: #2c2c2c;
+  color: #D67D3E;
   border-radius: 5px;
   cursor: pointer;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-
+  
 }
 
 .subBtn{
@@ -523,8 +524,6 @@ p {
   border-radius: 5px;
   text-align: center;
   text-decoration: none;
-  display: none;
-  width: 50%;
 
 }
 
@@ -591,14 +590,40 @@ p {
 .cta:hover {
  background-color: #1e293b;
   color: #fff;
-
+ 
 }
 
 
 
 
 /* CSS */
+.button-81 {
+  background-color: #fff;
+  border: 0 solid #e2e8f0;
+  border-radius: 1.5rem;
+  box-sizing: border-box;
+  color: #0d172a;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Basier circle",-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1;
+  padding: 1rem 1.6rem;
+  text-align: center;
+  text-decoration: none #0d172a solid;
+  text-decoration-thickness: auto;
+  transition: all .1s cubic-bezier(.4, 0, .2, 1);
+  box-shadow: 0px 1px 2px rgba(166, 175, 195, 0.25);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
 
+.button-81:hover {
+  background-color: #1e293b;
+  color: #fff;
+}
 
 @media (min-width: 768px) {
   .button-81 {
@@ -653,7 +678,7 @@ li.dropdown {
   justify-content: center;
   align-items: center;
   margin: auto;
-
+  
   height: 300px; /* Should be removed. Only for demonstration */
 }
 
@@ -687,7 +712,7 @@ outputp{
 
 .lodi h1{
   margin-top: 20px;
-
+  
 }
 
 .output p{
@@ -711,7 +736,7 @@ input[name="technique"] {
 }
 .label{
   font-size: 18px;
-
+ 
   font-weight: 300;
   font-style: bold;
   color:#D67D3E ;
@@ -746,17 +771,18 @@ input[name="technique"] {
 
 #customers td, #customers th {
   border: 1px solid #ddd;
-
-  padding: 20px;
+  padding: 1px;
 }
 
+#customers tr:nth-child(even){background-color: #f2f2f2;}
 
+#customers tr:hover {background-color: #ddd;}
 
 #customers th {
+  padding: 1px;
+   background-color: #29323c;
+  
 
-
-
-  color: white;
 }
 
 .change{
@@ -764,4 +790,15 @@ input[name="technique"] {
   text-decoration: none;
   font-size: 3rem;
 }
+.output{
+    width: 100%;
+}
 
+.output p{
+    font-size:2rem;
+  
+  }
+  
+  .output p span{
+    color: #D67D3E;
+  }

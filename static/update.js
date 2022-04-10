@@ -1,6 +1,15 @@
 const signUpButton = document.getElementById('signUp');
 const signInButton = document.getElementById('signIn');
 const container = document.getElementById('container');
+const changeP = document.getElementById('changeP');
+
+signUpButton.addEventListener('click', () => {
+	container.classList.add("right-panel-active");
+});
+
+signInButton.addEventListener('click', () => {
+	container.classList.remove("right-panel-active");
+});
 
 
 function showPreview(event){
@@ -9,6 +18,10 @@ function showPreview(event){
     var preview = document.getElementById("file-ip-1-preview");
     preview.src = src;
     preview.style.display = "block";
+    preview.style.height ="200px";
+    changeP.style.display ="block"
+
+
   }
 }
 

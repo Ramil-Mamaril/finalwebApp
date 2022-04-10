@@ -33,6 +33,7 @@ storage = firebase.storage()
 db = firebase.database()
 person = {"is_logged_in": False, "name": "","lastname":"", "email": "", "uid": "", "image": "","technique":"","predicted":"","predicted1":"","predicted2":"","predicted3":"","predicted4":"","percent":"","percent1":"","percent2":"","percent3":"","percent4":""}
 gUid = ""
+
 @app.route('/')
 def land():
     person["is_logged_in"] = False
@@ -312,210 +313,218 @@ def profile():
 
 @app.route('/predict')
 def predict():
-    global person
-    person["is_logged_in"] = True
-    person["uid"] = person["uid"]
-    person["name"] = person["name"]
-    person["email"] = person["email"]
-    # Get the name of the user
 
-    data = db.child("users").get()
-    person["image"] = data.val()[person["uid"]]["image"]
+        global person
+        person["is_logged_in"] = True
+        person["uid"] = person["uid"]
+        person["name"] = person["name"]
+        person["email"] = person["email"]
+        # Get the name of the user
+
+        data = db.child("users").get()
+        person["image"] = data.val()[person["uid"]]["image"]
+
+        sad = ""
 
 
-    return render_template("predict.html", email=person["email"], name=person["name"],image=person["image"])
+        return render_template("predict.html", email=person["email"], name=person["name"],image=person["image"],umessage=sad)
 
 
 @app.route('/pred', methods=['POST'])
 def pred():
-    freq = 44100
-    # get audio file
-    Desire = request.form["technique"]
-    audio_file= request.files["UploadedAudio"]
-    path = r"\static"
+    try:
+        freq = 44100
+        # get audio file
+        Desire = request.form["technique"]
+        audio_file = request.files["UploadedAudio"]
+        path = r"\static"
 
-    print(Desire)
-    print(audio_file)
+        print(Desire)
+        print(audio_file)
 
+        with open('static/audio.wav', 'wb') as audio:
+            audio_file.save(audio)
+        print('file uploaded successfully')
+        filename = "static/audio.wav"
+        print(filename)
+        # file_name = str(random.randint(0, 100000))
+        # save the file locally
+        # audio_file.save(file_name)
+        # my_clip = mp.VideoFileClip(r"audio_file")
 
+        # random string of digits for file name
+        print("tang ina mo")
 
-    with open('static/audio.wav', 'wb') as audio:
-       audio_file.save(audio)
-    print('file uploaded successfully')
-    filename ="static/audio.wav"
-    print(filename)
-    #file_name = str(random.randint(0, 100000))
-    # save the file locally
-   # audio_file.save(file_name)
-    # my_clip = mp.VideoFileClip(r"audio_file")
+        # make prediction
 
-    # random string of digits for file name
-    print("tang ina mo")
+        SAMPLE_RATE = 44100
+        TRACK_DURATION = 3  # measured in seconds
+        SAMPLES_PER_TRACK = SAMPLE_RATE * TRACK_DURATION
+        num_mfcc = 40
+        n_fft = 4096
+        hop_length = 512
+        num_segments = 6
 
-    # make prediction
+        samples_per_segment = int(SAMPLES_PER_TRACK / num_segments)
+        num_mfcc_vectors_per_segment = math.ceil(samples_per_segment / hop_length)
+        signal, sample_rate = librosa.load(filename, sr=SAMPLE_RATE, res_type='kaiser_fast')
 
-    SAMPLE_RATE = 44100
-    TRACK_DURATION = 3  # measured in seconds
-    SAMPLES_PER_TRACK = SAMPLE_RATE * TRACK_DURATION
-    num_mfcc = 40
-    n_fft = 4096
-    hop_length = 512
-    num_segments = 6
+        for d in range(num_segments):
+            start = samples_per_segment * d
+            finish = start + samples_per_segment
 
-    samples_per_segment = int(SAMPLES_PER_TRACK / num_segments)
-    num_mfcc_vectors_per_segment = math.ceil(samples_per_segment / hop_length)
-    signal, sample_rate = librosa.load(filename, sr=SAMPLE_RATE, res_type='kaiser_fast')
+        mfccs = librosa.feature.mfcc(signal[start:finish], sample_rate, n_mfcc=num_mfcc, n_fft=n_fft, hop_length=hop_length)
+        mfccs = mfccs.T
 
-    for d in range(num_segments):
-        start = samples_per_segment * d
-        finish = start + samples_per_segment
+        mfccs.shape
+        mfccs = mfccs[..., np.newaxis]
+        print(mfccs.shape)
+        mfccs = mfccs[np.newaxis, ...]
+        print(mfccs.shape)
+        prediction = model.predict(mfccs)
+        predicted_index = np.argmax(prediction, axis=1)
+        predicted = z[predicted_index]
+        percent = prediction[0, predicted_index] * 100
+        print("Prediction Summary")
+        print(predicted, ":", prediction[0, predicted_index])
+        # 2nd
+        prediction1 = prediction
+        predicted_index1 = np.argmax(prediction1, axis=1)
+        prediction1[0, predicted_index1] = 0
+        predicted_index2 = np.argmax(prediction1, axis=1)
+        predicted1 = z[predicted_index2]
+        percent1 = prediction1[0, predicted_index2] * 100
 
-    mfccs = librosa.feature.mfcc(signal[start:finish], sample_rate, n_mfcc=num_mfcc, n_fft=n_fft, hop_length=hop_length)
-    mfccs = mfccs.T
+        print(predicted1, ":", prediction1[0, predicted_index2])
+        # 3rd
+        prediction2 = prediction1
+        prediction2[0, predicted_index2] = 0
+        predicted_index3 = np.argmax(prediction2, axis=1)
+        predicted2 = z[predicted_index3]
+        percent2 = prediction2[0, predicted_index3] * 100
+        print(predicted2, ": ", prediction2[0, predicted_index3])
+        # 4th
+        prediction3 = prediction2
+        prediction3[0, predicted_index3] = 0
+        predicted_index4 = np.argmax(prediction3, axis=1)
+        predicted3 = z[predicted_index4]
+        percent3 = prediction3[0, predicted_index4] * 100
+        print(predicted3, ": ", prediction3[0, predicted_index4])
+        # 5th
+        prediction4 = prediction3
+        prediction4[0, predicted_index4] = 0
+        predicted_index5 = np.argmax(prediction4, axis=1)
+        predicted4 = z[predicted_index5]
+        percent4 = (prediction4[0, predicted_index5]) * 100
+        print(predicted4, ": ", prediction4[0, predicted_index5])
 
-    mfccs.shape
-    mfccs = mfccs[..., np.newaxis]
-    print(mfccs.shape)
-    mfccs = mfccs[np.newaxis, ...]
-    print(mfccs.shape)
-    prediction = model.predict(mfccs)
-    predicted_index = np.argmax(prediction, axis=1)
-    predicted = z[predicted_index]
-    percent = prediction[0, predicted_index] * 100
-    print("Prediction Summary")
-    print(predicted, ":", prediction[0, predicted_index])
-    # 2nd
-    prediction1 = prediction
-    predicted_index1 = np.argmax(prediction1, axis=1)
-    prediction1[0, predicted_index1] = 0
-    predicted_index2 = np.argmax(prediction1, axis=1)
-    predicted1 = z[predicted_index2]
-    percent1 = prediction1[0, predicted_index2] * 100
+        print_message = ' '.join([str(elem) for elem in predicted])
+        print_message2 = ' '.join([str(elem) for elem in predicted1])
+        print_message3 = ' '.join([str(elem) for elem in predicted2])
+        print_message4 = ' '.join([str(elem) for elem in predicted3])
+        print_message5 = ' '.join([str(elem) for elem in predicted4])
 
-    print(predicted1, ":", prediction1[0, predicted_index2])
-    # 3rd
-    prediction2 = prediction1
-    prediction2[0, predicted_index2] = 0
-    predicted_index3 = np.argmax(prediction2, axis=1)
-    predicted2 = z[predicted_index3]
-    percent2 = prediction2[0, predicted_index3] * 100
-    print(predicted2, ": ", prediction2[0, predicted_index3])
-    # 4th
-    prediction3 = prediction2
-    prediction3[0, predicted_index3] = 0
-    predicted_index4 = np.argmax(prediction3, axis=1)
-    predicted3 = z[predicted_index4]
-    percent3 = prediction3[0, predicted_index4] * 100
-    print(predicted3, ": ", prediction3[0, predicted_index4])
-    # 5th
-    prediction4 = prediction3
-    prediction4[0, predicted_index4] = 0
-    predicted_index5 = np.argmax(prediction4, axis=1)
-    predicted4 = z[predicted_index5]
-    percent4 = (prediction4[0, predicted_index5]) * 100
-    print(predicted4, ": ", prediction4[0, predicted_index5])
+        percent_message = ' '.join([str(elem) for elem in percent])
+        result = float(percent_message)
+        result = math.trunc(result)
+        percent_message = result
+        percent_message2 = ' '.join([str(elem) for elem in percent1])
+        result2 = float(percent_message2)
+        result2 = math.trunc(result2)
+        percent_message2 = result2
+        percent_message3 = ' '.join([str(elem) for elem in percent2])
+        result3 = float(percent_message3)
+        result3 = math.trunc(result3)
+        percent_message3 = result3
+        percent_message4 = ' '.join([str(elem) for elem in percent3])
+        result4 = float(percent_message4)
+        result4 = math.trunc(result4)
+        percent_message4 = result4
+        percent_message5 = ' '.join([str(elem) for elem in percent4])
+        result5 = float(percent_message5)
+        result5 = math.trunc(result5)
+        percent_message5 = result5
 
-    print_message = ' '.join([str(elem) for elem in predicted])
-    print_message2 = ' '.join([str(elem) for elem in predicted1])
-    print_message3 = ' '.join([str(elem) for elem in predicted2])
-    print_message4 = ' '.join([str(elem) for elem in predicted3])
-    print_message5 = ' '.join([str(elem) for elem in predicted4])
+        result = print_message
 
-    percent_message = ' '.join([str(elem) for elem in percent])
-    result = float(percent_message)
-    result = math.trunc(result)
-    percent_message = result
-    percent_message2 = ' '.join([str(elem) for elem in percent1])
-    result2 = float(percent_message2)
-    result2 = math.trunc(result2)
-    percent_message2 = result2
-    percent_message3 = ' '.join([str(elem) for elem in percent2])
-    result3 = float(percent_message3)
-    result3 = math.trunc(result3)
-    percent_message3 = result3
-    percent_message4 = ' '.join([str(elem) for elem in percent3])
-    result4 = float(percent_message4)
-    result4 = math.trunc(result4)
-    percent_message4 = result4
-    percent_message5 = ' '.join([str(elem) for elem in percent4])
-    result5 = float(percent_message5)
-    result5 = math.trunc(result5)
-    percent_message5 = result5
+        # remove the .wav file
 
-    result = print_message
+        # message to be displayed on the html webpage
+        prediction_message = print_message
+        prediction_message1 = print_message2
+        prediction_message2 = print_message3
+        prediction_message3 = print_message4
+        prediction_message4 = print_message5
 
+        outputArray = [(prediction_message, percent_message), (prediction_message1, percent_message2),
+                       (prediction_message2, percent_message3)
+            , (prediction_message3, percent_message4), (prediction_message4, percent_message5)]
+        print(outputArray)
+        global person
+        person["is_logged_in"] = True
+        person["uid"] = person["uid"]
+        person["name"] = person["name"]
+        person["email"] = person["email"]
+        # Get the name of the user
 
-    # remove the .wav file
+        data = db.child("users").get()
+        person["image"] = data.val()[person["uid"]]["image"]
 
-
-    # message to be displayed on the html webpage
-    prediction_message = print_message
-    prediction_message1 = print_message2
-    prediction_message2 = print_message3
-    prediction_message3 = print_message4
-    prediction_message4 = print_message5
-
-    outputArray = [(prediction_message,percent_message),(prediction_message1,percent_message2),(prediction_message2,percent_message3)
-                   ,(prediction_message3,percent_message4),(prediction_message4,percent_message5)]
-    print(outputArray)
-    global person
-    person["is_logged_in"] = True
-    person["uid"] = person["uid"]
-    person["name"] = person["name"]
-    person["email"] = person["email"]
-    # Get the name of the user
-
-    data = db.child("users").get()
-    person["image"] = data.val()[person["uid"]]["image"]
-
-
-
-    #store audio
-    #storage.child("users").child(person["uid"]).put(audio_file)
-    #audioUrl = storage.child("users").child(person["uid"]).get_url(person["email"])
-    #print(audioUrl)
-    #audiodata = {"audio": audioUrl}
-    #db.child("users").child(person["uid"]).update(audiodata)
-    print(Desire)
-    #save last input
-    if Desire == "DETACHE":
-        data = {"predicted":prediction_message,"predicted1":prediction_message1,"predicted2":prediction_message2,"predicted3":prediction_message3,"predicted4":prediction_message4,"percent":percent_message,"percent1":percent_message2,"percent2":percent_message3,"percent3":percent_message4,"percent4":percent_message5,"technique":Desire}
-        db.child("users").child(person["uid"]).child("Detache").update(data)
-    elif Desire =="CHORDS":
-        data = {"predicted": prediction_message, "predicted1": prediction_message1, "predicted2": prediction_message2,
-                "predicted3": prediction_message3, "predicted4": prediction_message4, "percent": percent_message,
-                "percent1": percent_message2, "percent2": percent_message3, "percent3": percent_message4,
-                "percent4": percent_message5, "technique": Desire}
-        db.child("users").child(person["uid"]).child("Chord").update(data)
-    elif Desire == "SON FILE":
-        data = {"predicted": prediction_message, "predicted1": prediction_message1, "predicted2": prediction_message2,
-                "predicted3": prediction_message3, "predicted4": prediction_message4, "percent": percent_message,
-                "percent1": percent_message2, "percent2": percent_message3, "percent3": percent_message4,
-                "percent4": percent_message5, "technique": Desire}
-        db.child("users").child(person["uid"]).child("SonFile").update(data)
-    elif Desire == "PORTATO":
-        data = {"predicted": prediction_message, "predicted1": prediction_message1, "predicted2": prediction_message2,
-                "predicted3": prediction_message3, "predicted4": prediction_message4, "percent": percent_message,
-                "percent1": percent_message2, "percent2": percent_message3, "percent3": percent_message4,
-                "percent4": percent_message5, "technique": Desire}
-        db.child("users").child(person["uid"]).child("Portato").update(data)
-    elif Desire == "LEGATO":
-        data = {"predicted": prediction_message, "predicted1": prediction_message1, "predicted2": prediction_message2,
-                "predicted3": prediction_message3, "predicted4": prediction_message4, "percent": percent_message,
-                "percent1": percent_message2, "percent2": percent_message3, "percent3": percent_message4,
-                "percent4": percent_message5, "technique": Desire}
-        db.child("users").child(person["uid"]).child("Legato").update(data)
-        return render_template("predict.html", prediction_text=prediction_message, prediction_text2=prediction_message1,
-                               prediction_text3=prediction_message2, prediction_text4=prediction_message3,
-                               prediction_text5=prediction_message4, percent_text=percent_message,
-                               percent_text2=percent_message2, percent_text3=percent_message3,
-                               percent_text4=percent_message4, percent_text5=percent_message5, show_modal=True,
-                               email=person["email"], name=person["name"], image=person["image"],
-                               audiofile="static/audio.wav", targetc=Desire)
-
-    return render_template("predict.html", prediction_text=prediction_message, prediction_text2=prediction_message1,
+        # store audio
+        # storage.child("users").child(person["uid"]).put(audio_file)
+        # audioUrl = storage.child("users").child(person["uid"]).get_url(person["email"])
+        # print(audioUrl)
+        # audiodata = {"audio": audioUrl}
+        # db.child("users").child(person["uid"]).update(audiodata)
+        print(Desire)
+        # save last input
+        if Desire == "DETACHE":
+            data = {"predicted": prediction_message, "predicted1": prediction_message1, "predicted2": prediction_message2,
+                    "predicted3": prediction_message3, "predicted4": prediction_message4, "percent": percent_message,
+                    "percent1": percent_message2, "percent2": percent_message3, "percent3": percent_message4,
+                    "percent4": percent_message5, "technique": Desire}
+            db.child("users").child(person["uid"]).child("Detache").update(data)
+        elif Desire == "CHORDS":
+            data = {"predicted": prediction_message, "predicted1": prediction_message1, "predicted2": prediction_message2,
+                    "predicted3": prediction_message3, "predicted4": prediction_message4, "percent": percent_message,
+                    "percent1": percent_message2, "percent2": percent_message3, "percent3": percent_message4,
+                    "percent4": percent_message5, "technique": Desire}
+            db.child("users").child(person["uid"]).child("Chord").update(data)
+        elif Desire == "SON FILE":
+            data = {"predicted": prediction_message, "predicted1": prediction_message1, "predicted2": prediction_message2,
+                    "predicted3": prediction_message3, "predicted4": prediction_message4, "percent": percent_message,
+                    "percent1": percent_message2, "percent2": percent_message3, "percent3": percent_message4,
+                    "percent4": percent_message5, "technique": Desire}
+            db.child("users").child(person["uid"]).child("SonFile").update(data)
+        elif Desire == "PORTATO":
+            data = {"predicted": prediction_message, "predicted1": prediction_message1, "predicted2": prediction_message2,
+                    "predicted3": prediction_message3, "predicted4": prediction_message4, "percent": percent_message,
+                    "percent1": percent_message2, "percent2": percent_message3, "percent3": percent_message4,
+                    "percent4": percent_message5, "technique": Desire}
+            db.child("users").child(person["uid"]).child("Portato").update(data)
+        elif Desire == "LEGATO":
+            data = {"predicted": prediction_message, "predicted1": prediction_message1, "predicted2": prediction_message2,
+                    "predicted3": prediction_message3, "predicted4": prediction_message4, "percent": percent_message,
+                    "percent1": percent_message2, "percent2": percent_message3, "percent3": percent_message4,
+                    "percent4": percent_message5, "technique": Desire}
+            db.child("users").child(person["uid"]).child("Legato").update(data)
+            return render_template("output.html", prediction_text=prediction_message, prediction_text2=prediction_message1,
+                                   prediction_text3=prediction_message2, prediction_text4=prediction_message3,
+                                   prediction_text5=prediction_message4, percent_text=percent_message,
+                                   percent_text2=percent_message2, percent_text3=percent_message3,
+                                   percent_text4=percent_message4, percent_text5=percent_message5, show_modal=True,
+                                   email=person["email"], name=person["name"], image=person["image"],
+                                   audiofile="static/audio.wav", targetc=Desire)
+    except:
+        mensahe = "Invalid Input! User recordings should be 3 seconds for an optimal result"
+        return render_template("predict.html", email=person["email"], name=person["name"], image=person["image"],umessage=mensahe)
+    return render_template("output.html", prediction_text=prediction_message, prediction_text2=prediction_message1,
                            prediction_text3=prediction_message2, prediction_text4=prediction_message3,
-                           prediction_text5=prediction_message4,percent_text = percent_message,percent_text2 = percent_message2,percent_text3 = percent_message3,percent_text4 = percent_message4,percent_text5 = percent_message5, show_modal=True ,email=person["email"], name=person["name"],image=person["image"],audiofile ="static/audio.wav",targetc = Desire)
+                           prediction_text5=prediction_message4, percent_text=percent_message,
+                           percent_text2=percent_message2, percent_text3=percent_message3,
+                           percent_text4=percent_message4, percent_text5=percent_message5, show_modal=True,
+                           email=person["email"], name=person["name"], image=person["image"],
+                           audiofile="static/audio.wav", targetc=Desire)
 
 
 if __name__ == '__main__':

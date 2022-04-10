@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="static/login.css">
+  <title></title>
+</head>
+<body>
+
+   <!-- Header -->
+  <section id="header">
+    <div class="header container">
+      <div class="nav-bar">
+        <div class="brand">
+          <a href="#hero">
+            <h1><span>V</span>iolin <span>I</span>o</h1>
+          </a>
+        </div>
+        <div class="nav-list">
+          <div class="hamburger">
+            <div class="bar"></div>
+          </div>-
+          <ul>
+            <li><a href="/" data-after="Home">Home</a></li>
+            <li><a href="/login" >Sign in/ Sign up</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+<section id="projects">
+    <div class="projects container">
+      <div class="logincontainer" id="container">
+        <div class="form-container sign-up-container">
+          <form action="/create" method="post"enctype="multipart/form-data" >
+            <h1 class="loginh1">Create Account</h1>
+            <input type="username" required placeholder="Firstname" name="username" />
+            <input type="username" required placeholder="Lastname" name="lname" />
+            <input type="email" placeholder="Email" name ="email" />
+            <input type="password" placeholder="Password" name="password" />
+            <button class="loginbutton">Sign Up</button>
+          </form>
+        </div>
+        <div class="form-container sign-in-container">
+          <form action="/login" method="post">
+            <h1 class="loginh1">Sign in</h1>
+            <input type="email" placeholder="Email" name = "email"/>
+            <input type="password" placeholder="Password" name="password" />
+            <a class="logina" href="#">Forgot your password?</a>
+            <button class="loginbutton">Sign In</button>
+          </form>
+        </div>
+        <div class="overlay-container">
+          <div class="overlay">
+            <div class="overlay-panel overlay-left">
+              <h1 class="loginh1">Welcome Back!</h1>
+              <p class="loginp">To keep connected with us please login with your personal info</p>
+              <button class="loginbutton ghost" id="signIn">Sign In</button>
+            </div>
+            <div class="overlay-panel overlay-right">
+              <h1 class="loginh1">Hello, Friend!</h1>
+              <p class="loginp">Enter your personal details and start journey with us</p>
+              <button class="loginbutton ghost" id="signUp">Sign Up</button>
+            </div>
+          </div>
+        </div>
+      </div>
+         {% if umessage %}
+
+    <p style="padding:10px;background-color:pink;color:red;">{{ umessage }}</p>
+
+   {% endif %}
+  </div>
+
+
+</section>
+
+<section id="footer">
+    <div class="footer container">
+      <div class="brand">
+     <!--   <h1><span>S</span>haif <span>A</span>rfan</h1> -->
+      </div>
+      <h2>Your Complete Web Solution</h2>
+      <div class="social-icon">
+        <div class="social-item">
+          <a href="#"><img src="https://img.icons8.com/bubbles/100/000000/facebook-new.png" /></a>
+        </div>
+        <div class="social-item">
+          <a href="#"><img src="https://img.icons8.com/bubbles/100/000000/instagram-new.png" /></a>
+        </div>
+        <div class="social-item">
+          <a href="#"><img src="https://img.icons8.com/bubbles/100/000000/twitter.png" /></a>
+        </div>
+        <div class="social-item">
+          <a href="#"><img src="https://img.icons8.com/bubbles/100/000000/behance.png" /></a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+ <script src="static/login.js"></script>
+</body>
+</html>

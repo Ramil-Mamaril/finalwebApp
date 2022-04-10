@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="static/update.css">
+  <title></title>
+</head>
+<body>
+
+   <!-- Header -->
+  <section id="header">
+    <div class="header container">
+      <div class="nav-bar">
+        <div class="brand">
+          <a href="#hero">
+            <h1><span>V</span>iolin <span>I</span>o</h1>
+          </a>
+        </div>
+        <div class="nav-list">
+          <div class="hamburger">
+            <div class="bar"></div>
+          </div>-
+          <ul>
+            <li><a href="/landingpage" class="active">Home</a></li>
+            <li><a href="/technique">Learn</a></li>
+            <li><a href="/predict" >Real Time Classification</a></li>
+            <li class="dropdown">
+              <a href="profile.html" class="dropbtn">{{name}}<img src=" {{image}} " alt="profile_img" style="vertical-align: top; height: 25px;width: 40px; border-radius: 22px;"></a>
+              <div class="dropdown-content">
+                <a href="profile.html">Profile</a>
+                <a href="/update">Update Profile</a>
+                <a href="/">Log Out</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+ <section id="projects">
+    <div class="projects container ">
+      <div class="logincontainer right-panel-active" id="container">
+        <div class="form-container sign-up-container">
+            <form action="/profileupdate" method="post" enctype="multipart/form-data">
+              <h1 class="loginh1">Update Profile Picture</h1>
+                <div class="center">
+                  <div class="form-input">
+                    <div class="preview">
+                      <img id="file-ip-1-preview">
+                    </div>
+                    <label for="file-ip-1">Upload Image</label>
+                    <input type="file" name ="avatar"id="file-ip-1" accept="image/*" onchange="showPreview(event);">
+                    <button class="loginbutton">Change Profile</button>
+                  </div>
+                </div>
+
+            </form>
+        </div>
+        <div class="overlay-container">
+          <div class="overlay">
+            <div class="overlay-panel overlay-left">
+              <form action="/update" method="post" enctype="multipart/form-data" style="  background-color:#29323c;" >
+                <h1 class="loginh1">Update Acc Information </h1>
+                <div class="center">
+
+                    <input type="username" required placeholder="First Name" name="username" />
+                    <input type="username" required placeholder="Last Name" name="lastname" />
+                    <button class="loginbutton">Change Profile</button>
+
+                </div>
+              </form>
+            </div>
+
+          </div>
+        </div>
+    </div>
+  </div>
+  <div class = "warning" style =" color: red; background-color: white;
+padding: 10px;
+font-size:1.5rem;">
+                    {% if umessage %}
+
+                        {{ umessage }}
+
+                    {% endif %}
+                </div>
+  </div>
+</section>
+<section id="footer">
+    <div class="footer container">
+      <div class="brand">
+     <!--   <h1><span>S</span>haif <span>A</span>rfan</h1> -->
+      </div>
+      <h2>Your Complete Web Solution</h2>
+      <div class="social-icon">
+        <div class="social-item">
+          <a href="#"><img src="https://img.icons8.com/bubbles/100/000000/facebook-new.png" /></a>
+        </div>
+        <div class="social-item">
+          <a href="#"><img src="https://img.icons8.com/bubbles/100/000000/instagram-new.png" /></a>
+        </div>
+        <div class="social-item">
+          <a href="#"><img src="https://img.icons8.com/bubbles/100/000000/twitter.png" /></a>
+        </div>
+        <div class="social-item">
+          <a href="#"><img src="https://img.icons8.com/bubbles/100/000000/behance.png" /></a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+ <script src="static/update.js"></script>
+</body>
+</html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="static/profile.css">
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+
+  <title>My Website</title>
+</head>
+
+<body>
+  <!-- Header -->
+  <section id="header">
+    <div class="header container">
+      <div class="nav-bar">
+        <div class="brand">
+          <a href="#hero">
+            <h1><span>V</span>iolin <span>I</span>o</h1>
+          </a>
+        </div>
+        <div class="nav-list">
+          <div class="hamburger">
+            <div class="bar"></div>
+          </div>-
+          <ul>
+            <li><a href="/landingpage" >Home</a></li>
+            <li><a href="/technique" >Learn</a></li>
+            <li><a href="/predict">Real Time Classification</a></li>
+            <li class="dropdown">
+              <a href="/profile" class="dropbtn">{{name}} <img src=" {{image}} " alt="profile_img" style="vertical-align: top; height: 25px;width: 40px; border-radius: 22px;"></a>
+              <div class="dropdown-content">
+                <a href="/profile">Profile</a>
+                <a href="/update">Update Profile</a>
+                <a href="/">Log Out</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Header -->
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+
+  <!-- About Section -->
+
+
+  <!-- About Section -->
+  <section id="about">
+    <div class="about container">
+      <div class="col-left">
+        <div class="about-img">
+          <img src="{{image}}" alt="img">
+        </div>
+      </div>
+      <div class="col-right">
+        <h1 class="section-title"><span>{{name}}</span>{{ lastname}}</h1>
+        <h2>{{email}}</h2>
+        <button class="collapsible">Detache</button>
+         <div class="content">
+               {% if dtechnique == "" %}
+                <p style="padding:10px;background-color:pink;color:red; margin-bottom:10px;">No History. try and test the prediction algorithm by going to classification <a href="/predict" style="text-decoration:none;">page</a> </p>
+              {% endif %}
+
+              {% if dtechnique != "" %}
+               <div class="output">
+
+                <table id="customers">
+                    <tr>
+                      <th colspan="2"><p>Target Output: <span> {{dtechnique}}</span></p></th>
+                    </tr>
+                    <tr>
+                      <th><p>Classifications</p></th>
+                      <th><p><span>Accuracy</span></p></th>
+                    </tr>
+                    <tr>
+                      <td><p>{{dpredict}}</p> </td>
+                      <td> <p><span>{{ dpercent }} </span></p></td>
+                    </tr>
+                    <tr>
+                      <td><p>{{dpredict1}}</p> </td>
+                      <td> <p><span>{{ dpercent1 }} </span></p></td>
+
+                    </tr>
+                    <tr>
+                      <td><p>{{ dpredict2}}</p> </td>
+                      <td> <p><span>{{ dpercent }} </span></p></td>
+                    </tr>
+                    <tr>
+                      <td><p>{{ dpredict3}}</p> </td>
+                      <td> <p><span>{{ dpercent3 }} </span></p></td>
+                    </tr>
+                    <tr>
+                      <td><p>{{ dpredict4}}</p> </td>
+                      <td> <p><span>{{ dpercent4 }} </span></p></td>
+                    </tr>
+
+                  </table>
+          </div>
+          {% endif %}
+         </div>
+          <button class="collapsible">Chord</button>
+         <div class="content">
+               {% if ctechnique == "" %}
+                <p style="padding:10px;background-color:pink;color:red; margin-bottom:10px;">No History. try and test the prediction algorithm by going to classification <a href="/predict" style="text-decoration:none;">page</a> </p>
+              {% endif %}
+
+              {% if ctechnique != "" %}
+               <div class="output">
+
+                <table id="customers">
+                    <tr>
+                      <th colspan="2"><p>Target Output: <span> {{ctechnique}}</span></p></th>
+                    </tr>
+                    <tr>
+                      <th><p>Classifications</p></th>
+                      <th><p><span>Accuracy</span></p></th>
+                    </tr>
+                    <tr>
+                      <td><p>{{cpredict}}</p> </td>
+                      <td> <p><span>{{ cpercent }} </span></p></td>
+                    </tr>
+                    <tr>
+                      <td><p>{{cpredict1}}</p> </td>
+                      <td> <p><span>{{ cpercent1 }} </span></p></td>
+
+                    </tr>
+                    <tr>
+                      <td><p>{{ cpredict2}}</p> </td>
+                      <td> <p><span>{{ cpercent2 }} </span></p></td>
+                    </tr>
+                    <tr>
+                      <td><p>{{ cpredict3}}</p> </td>
+                      <td> <p><span>{{ cpercent3 }} </span></p></td>
+                    </tr>
+                    <tr>
+                      <td><p>{{ cpredict4}}</p> </td>
+                      <td> <p><span>{{ cpercent4 }} </span></p></td>
+                    </tr>
+
+                  </table>
+          </div>
+          {% endif %}
+         </div>
+          <button class="collapsible">SonFile</button>
+         <div class="content">
+               {% if stechnique == "" %}
+                <p style="padding:10px;background-color:pink;color:red; margin-bottom:10px;">No History. try and test the prediction algorithm by going to classification <a href="/predict" style="text-decoration:none;">page</a> </p>
+              {% endif %}
+
+              {% if stechnique != "" %}
+               <div class="output">
+
+                <table id="customers">
+                    <tr>
+                      <th colspan="2"><p>Target Output: <span> {{stechnique}}</span></p></th>
+                    </tr>
+                    <tr>
+                      <th><p>Classifications</p></th>
+                      <th><p><span>Accuracy</span></p></th>
+                    </tr>
+                    <tr>
+                      <td><p>{{spredict}}</p> </td>
+                      <td> <p><span>{{ spercent }} </span></p></td>
+                    </tr>
+                    <tr>
+                      <td><p>{{spredict1}}</p> </td>
+                      <td> <p><span>{{ spercent1 }} </span></p></td>
+
+                    </tr>
+                    <tr>
+                      <td><p>{{spredict2}}</p> </td>
+                      <td> <p><span>{{spercent }} </span></p></td>
+                    </tr>
+                    <tr>
+                      <td><p>{{spredict3}}</p> </td>
+                      <td> <p><span>{{spercent3 }} </span></p></td>
+                    </tr>
+                    <tr>
+                      <td><p>{{spredict4}}</p> </td>
+                      <td> <p><span>{{spercent4 }} </span></p></td>
+                    </tr>
+
+                  </table>
+          </div>
+          {% endif %}
+         </div>
+          <button class="collapsible">Legato</button>
+         <div class="content">
+               {% if ltechnique == "" %}
+                <p style="padding:10px;background-color:pink;color:red; margin-bottom:10px;">No History. try and test the prediction algorithm by going to classification <a href="/predict" style="text-decoration:none;">page</a> </p>
+              {% endif %}
+
+              {% if ltechnique != "" %}
+               <div class="output">
+
+                <table id="customers">
+                    <tr>
+                      <th colspan="2"><p>Target Output: <span> {{ltechnique}}</span></p></th>
+                    </tr>
+                    <tr>
+                      <th><p>Classifications</p></th>
+                      <th><p><span>Accuracy</span></p></th>
+                    </tr>
+                    <tr>
+                      <td><p>{{lpredict}}</p> </td>
+                      <td> <p><span>{{ lpercent }} </span></p></td>
+                    </tr>
+                    <tr>
+                      <td><p>{{lpredict1}}</p> </td>
+                      <td> <p><span>{{ lpercent1 }} </span></p></td>
+
+                    </tr>
+                    <tr>
+                      <td><p>{{ lpredict2}}</p> </td>
+                      <td> <p><span>{{ lpercent }} </span></p></td>
+                    </tr>
+                    <tr>
+                      <td><p>{{ lpredict3}}</p> </td>
+                      <td> <p><span>{{ lpercent3 }} </span></p></td>
+                    </tr>
+                    <tr>
+                      <td><p>{{ lpredict4}}</p> </td>
+                      <td> <p><span>{{ lpercent4 }} </span></p></td>
+                    </tr>
+
+                  </table>
+          </div>
+          {% endif %}
+         </div>
+          <button class="collapsible">Portato</button>
+         <div class="content">
+               {% if ptechnique == "" %}
+                <p style="padding:10px;background-color:pink;color:red; margin-bottom:10px;">No History. try and test the prediction algorithm by going to classification <a href="/predict" style="text-decoration:none;">page</a> </p>
+              {% endif %}
+
+              {% if ptechnique != "" %}
+               <div class="output">
+
+                <table id="customers">
+                    <tr>
+                      <th colspan="2"><p>Target Output: <span> {{ptechnique}}</span></p></th>
+                    </tr>
+                    <tr>
+                      <th><p>Classifications</p></th>
+                      <th><p><span>Accuracy</span></p></th>
+                    </tr>
+                    <tr>
+                      <td><p>{{ppredict}}</p> </td>
+                      <td> <p><span>{{ ppercent }} </span></p></td>
+                    </tr>
+                    <tr>
+                      <td><p>{{predict1}}</p> </td>
+                      <td> <p><span>{{ ppercent1 }} </span></p></td>
+
+                    </tr>
+                    <tr>
+                      <td><p>{{ predict2}}</p> </td>
+                      <td> <p><span>{{ ppercent }} </span></p></td>
+                    </tr>
+                    <tr>
+                      <td><p>{{ ppredict3}}</p> </td>
+                      <td> <p><span>{{ ppercent3 }} </span></p></td>
+                    </tr>
+                    <tr>
+                      <td><p>{{ ppredict4}}</p> </td>
+                      <td> <p><span>{{ p }} </span></p></td>
+                    </tr>
+
+                  </table>
+          </div>
+          {% endif %}
+         </div>
+
+
+
+
+
+      </div>
+    </div>
+  </section>
+  <!-- End About Section -->
+
+
+
+
+
+
+  <!-- Footer -->
+  <section id="footer">
+    <div class="footer container">
+      <div class="brand">
+     <!--   <h1><span>S</span>haif <span>A</span>rfan</h1> -->
+      </div>
+      <h2>Your Complete Web Solution</h2>
+      <div class="social-icon">
+        <div class="social-item">
+          <a href="#"><img src="https://img.icons8.com/bubbles/100/000000/facebook-new.png" /></a>
+        </div>
+        <div class="social-item">
+          <a href="#"><img src="https://img.icons8.com/bubbles/100/000000/instagram-new.png" /></a>
+        </div>
+        <div class="social-item">
+          <a href="#"><img src="https://img.icons8.com/bubbles/100/000000/twitter.png" /></a>
+        </div>
+        <div class="social-item">
+          <a href="#"><img src="https://img.icons8.com/bubbles/100/000000/behance.png" /></a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <!-- End Footer -->
+
+
+
+
+
+
+
+
+<script src="static/profile.js"></script>
+
+
+
+
+
+</body>
+
+
+</html>

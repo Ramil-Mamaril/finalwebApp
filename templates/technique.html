@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="static/technique.css">
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    
+  <title>My Website</title>
+</head>
+
+<body>
+  <!-- Header -->
+  <section id="header">
+    <div class="header container">
+      <div class="nav-bar">
+        <div class="brand">
+          <a href="#hero">
+            <h1><span>V</span>iolin <span>I</span>o</h1>
+          </a>
+        </div>
+        <div class="nav-list">
+          <div class="hamburger">
+            <div class="bar"></div>
+          </div>-
+          <ul>
+            <li><a href="/landingpage" >Home</a></li>
+            <li><a href="/technique"  class="active" >Learn</a></li>
+            <li><a href="/predict" data-after="About">Real Time Classification</a></li>
+            <li class="dropdown">
+              <a href="/profile" class="dropbtn">{{name}} <img src=" {{image}} " alt="profile_img" style="vertical-align: top; height: 25px;width: 40px; border-radius: 22px;"></a>
+              <div class="dropdown-content">
+                <a href="/profile">Profile</a>
+                <a href="/update">Update Profile</a>
+                <a href="/">Log Out</a>
+              </div>
+            </li>
+          </ul>
+        </div>  
+      </div>
+    </div>
+  </section>
+  <!-- End Header -->
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+<section id="projects">
+  <div class="projects container">
+    <div class="projects-header">
+      <h1 class="section-title">Bowing <span>Tutorial</span></h1>
+    </div>
+    <div class="all-projects">
+      <div class="project-item">
+        <div class="project-info">
+          <h1>Detache</h1>
+          <p>Detaché is a playing technique on violin and other string instruments that calls for broad but separate bow strokes. In printed sheet music, the notes simply are not slurred. Sonically, detaché achieves a median balance between the fluid legato technique and jaunty staccato technique.</p>
+       <!--   <button id="myBtn" class="button">Open Modal</button> -->
+           <button class="btn" id="myBtn">
+            <span class="btn-icon"><i class="fa fa-youtube-play" style="font-size:30px; color:  #D67D3E;" aria-hidden="true"></i></span>
+            <span class="btn-text">Play Video Tutorial</span>
+          </button>
+        </div>
+        <div class="project-img">
+          <img src="/static/img/img1.jpg" alt="img">
+        </div>
+      </div>
+      <div class="project-item">
+        <div class="project-info">
+          <h1>Chords</h1>
+       
+          <p>A chord is a set of three or more different notes. These notes must play of the same time and be in a specific key. Since playing three strings at once on the violin is so difficult, a dyad or two notes of the chord, is what is played.</p>
+         <button class="btn" id="myBtn2">
+            <span class="btn-icon"><i class="fa fa-youtube-play" style="font-size:30px; color:  #D67D3E;" aria-hidden="true"></i></span>
+            <span class="btn-text">Play Video Tutorial</span>
+          </button>
+        </div>
+        <div class="project-img"> 
+          <img src="/static/img/img2.jpg" alt="img">
+        </div>
+      </div>
+      <div class="project-item">
+        <div class="project-info">
+          <h1>Son File</h1>
+  
+          <p>A variant of Detache bowign technique that is characterized by Beginning at the tip and keeping the bow parallel to the end of the fingerboard and the bridge, steadily move the bow to the frog, generating a pleasant sound while counting.</p>
+            <button class="btn" id="myBtn3">
+            <span class="btn-icon"><i class="fa fa-youtube-play" style="font-size:30px; color:  #D67D3E;" aria-hidden="true"></i></span>
+            <span class="btn-text">Play Video Tutorial</span>
+          </button>
+        </div>
+        <div class="project-img">
+          <img src="/static/img/img3.jpg" alt="img">
+        </div>
+      </div>
+      <div class="project-item">
+        <div class="project-info">
+          <h1>Legato</h1>
+       
+          <p>Legato is an Italian word that means “tied together.” In stringed-instrument lingo, it signifies smooth and connected bow strokes, which can be connected by slurs or by smooth bow changes. Artistically speaking, legato holds the key to bringing out the best tone and most melodious tendencies of the instrument</p>
+          <button class="btn" id="myBtn4">
+            <span class="btn-icon"><i class="fa fa-youtube-play" style="font-size:30px; color:  #D67D3E;" aria-hidden="true"></i></span>
+            <span class="btn-text">Play Video Tutorial</span>
+          </button>
+        </div>  
+        <div class="project-img">
+          <img src="/static/img/img4.jpg" alt="img">
+        </div>
+      </div>
+      <div class="project-item">
+        <div class="project-info">
+          <h1>Portato</h1>
+          <p>Portato is a bowing technique for stringed instruments, in which successive notes are gently re-articulated while being joined under a single continuing bow stroke. It achieves a kind of pulsation or undulation, rather than separating the notes.</p>
+          <button class="btn" id="myBtn5">
+            <span class="btn-icon"><i class="fa fa-youtube-play" style="font-size:30px; color:  #D67D3E;" aria-hidden="true"></i></span>
+            <span class="btn-text">Play Video Tutorial</span>
+          </button>
+        </div>
+        <div class="project-img">
+          <img src="/static/img/img5.jpg" alt="img">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+ 
+
+
+  <!-- Footer -->
+  <section id="footer">
+    <div class="footer container">
+      <div class="brand">
+     <!--   <h1><span>S</span>haif <span>A</span>rfan</h1> -->
+      </div>
+      <h2>Your Complete Web Solution</h2>
+      <div class="social-icon">
+        <div class="social-item">
+          <a href="#"><img src="https://img.icons8.com/bubbles/100/000000/facebook-new.png" /></a>
+        </div>
+        <div class="social-item">
+          <a href="#"><img src="https://img.icons8.com/bubbles/100/000000/instagram-new.png" /></a>
+        </div>
+        <div class="social-item">
+          <a href="#"><img src="https://img.icons8.com/bubbles/100/000000/twitter.png" /></a>
+        </div>
+        <div class="social-item">
+          <a href="#"><img src="https://img.icons8.com/bubbles/100/000000/behance.png" /></a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <!-- End Footer -->
+
+
+
+
+  <!-- Detache Modal -->
+<div id="myModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+
+    <div class="modal-head">
+          <h2>Detache</h2>
+    </div>
+
+    <div class="modal-body">
+      <iframe class="ivideo" id = "video" src="" allowfullscreen >
+      </iframe>
+    </div>
+
+    <div class="modal-foot">
+      <h2> </h2>
+     <span id="close" class="close">EXIT</span>
+    
+    </div>
+  </div>
+</div>
+
+
+  <!-- Chords Modal -->
+<div id="myModal2" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    
+    <div class="modal-head">
+          <h2>Chords</h2>
+    </div>
+
+    <div class="modal-body">
+      <iframe class="ivideo" id = "video1" src="" allowfullscreen >
+      </iframe>
+    </div>
+
+    <div class="modal-foot">
+      <h2> </h2>
+      <span id="close" class="close">EXIT</span>
+      
+    </div>
+  </div>
+</div>
+
+  <!-- Sonfile Modal -->
+<div id="myModal3" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    
+    <div class="modal-head">
+          <h2>Son File</h2>
+    </div>
+
+    <div class="modal-body">
+      <iframe class="ivideo" id = "video2" src="" allowfullscreen >
+      </iframe>
+    </div>
+
+    <div class="modal-foot">
+      <h2> </h2>
+      <span id="close" class="close">EXIT</span>
+     
+    </div>
+  </div>
+</div>
+
+  <!-- Legato Modal -->
+<div id="myModal4" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    
+    <div class="modal-head">
+          <h2>Legato</h2>
+    </div>
+
+    <div class="modal-body">
+      <iframe class="ivideo" id = "video3" src="" allowfullscreen >
+      </iframe>
+    </div>
+
+    <div class="modal-foot">
+      <h2> </h2>
+      <span id="close" class="close">EXIT</span>
+     
+    </div>
+  </div>
+</div>
+
+  <!-- Portato Modal -->
+<div id="myModal5" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    
+    <div class="modal-head">
+          <h2>Portato</h2>
+    </div>
+
+    <div class="modal-body">
+      <iframe class="ivideo" id = "video4" src="" allowfullscreen >
+      </iframe>
+    </div>
+
+    <div class="modal-foot">
+      <h2> </h2>
+      <span id="close" class="close">EXIT</span>
+     
+    </div>
+  </div>
+</div>
+
+
+<script src="static/technique.js"></script>
+
+
+<script type="text/javascript">
+
+// DETACHE MODAL  
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Youtube Link
+var ivideo1 = document.getElementById("video");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+  ivideo1.src="https://www.youtube.com/embed/f7ch-wWu1P4";
+  $('body').css('overflow', 'hidden');
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+  ivideo1.src=ivideo1.src;
+  $('body').css('overflow', 'auto');
+}
+// END DETACHE MODAL 
+
+// CHORDS MODAL  
+// Get the modal
+var modal2 = document.getElementById("myModal2");
+
+// Youtube Link
+var ivideo2 = document.getElementById("video1");
+
+// Get the button that opens the modal
+var btn2 = document.getElementById("myBtn2");
+
+// Get the <span> element that closes the modal
+var span2 = document.getElementsByClassName("close")[1];
+
+// When the user clicks the button, open the modal 
+btn2.onclick = function() {
+  modal2.style.display = "block";
+  ivideo2.src="https://www.youtube.com/embed/SwEGfpyJX_I";
+  $('body').css('overflow', 'hidden');
+}
+
+// When the user clicks on <span> (x), close the modal
+span2.onclick = function() {
+  modal2.style.display = "none";
+  ivideo2.src=ivideo2.src;
+  $('body').css('overflow', 'auto');
+}
+// END CHORDS MODAL 
+
+// SONFILE MODAL
+var modal3 = document.getElementById("myModal3");
+
+// Youtube Link
+var ivideo3 = document.getElementById("video2");
+
+// Get the button that opens the modal
+var btn3 = document.getElementById("myBtn3");
+
+// Get the <span> element that closes the modal
+var span3 = document.getElementsByClassName("close")[2];
+
+// When the user clicks the button, open the modal 
+btn3.onclick = function() {
+  modal3.style.display = "block";
+  ivideo3.src="https://www.youtube.com/embed/nbuNotrDeUI";
+  $('body').css('overflow', 'hidden');
+}
+
+// When the user clicks on <span> (x), close the modal
+span3.onclick = function() {
+  modal3.style.display = "none";
+  ivideo3.src=ivideo3.src;
+  $('body').css('overflow', 'auto');
+}
+// END SONFILE MODAL 
+
+// LEGATO MODAL
+var modal4 = document.getElementById("myModal4");
+
+// Youtube Link
+var ivideo4 = document.getElementById("video3");
+
+// Get the button that opens the modal
+var btn4 = document.getElementById("myBtn4");
+
+// Get the <span> element that closes the modal
+var span4 = document.getElementsByClassName("close")[3];
+
+// When the user clicks the button, open the modal 
+btn4.onclick = function() {
+  modal4.style.display = "block";
+  ivideo4.src="https://www.youtube.com/embed/YU7FX4YaPNQ";
+  $('body').css('overflow', 'hidden');
+}
+
+// When the user clicks on <span> (x), close the modal
+span4.onclick = function() {
+  modal4.style.display = "none";
+  ivideo4.src=ivideo4.src;
+  $('body').css('overflow', 'auto');
+}
+// END LEGATO MODAL 
+
+// PORTATO MODAL  
+var modal5 = document.getElementById("myModal5");
+
+// Youtube Link
+var ivideo5 = document.getElementById("video4");
+
+// Get the button that opens the modal
+var btn5 = document.getElementById("myBtn5");
+
+// Get the <span> element that closes the modal
+var span5 = document.getElementsByClassName("close")[4];
+
+// When the user clicks the button, open the modal 
+btn5.onclick = function() {
+  modal5.style.display = "block";
+  ivideo5.src="https://www.youtube.com/embed/eBkzM_PFHu0";
+  $('body').css('overflow', 'hidden');
+}
+
+// When the user clicks on <span> (x), close the modal
+span5.onclick = function() {
+  modal5.style.display = "none";
+  ivideo5.src=ivideo5.src;
+  $('body').css('overflow', 'auto');
+}
+// END PORTATO MODAL 
+
+
+</script>
+
+
+</body>
+
+
+</html>

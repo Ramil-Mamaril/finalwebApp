@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="static/predict.css">
+  <link rel="stylesheet" href="static/output.css">
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 
   <title>My Website</title>
@@ -42,58 +42,52 @@
     </div>
   </section>
   <!-- End Header -->
-
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 <section id="projects">
-
   <div class="projects container">
     <div class="projects-header">
-      <h1 class="section-title">Bowing <span>Classification</span></h1>
-    </div>
-    <form action="{{ url_for('pred')}}" method="post"  enctype="multipart/form-data" id ="sadfile" style="width: 100%;" >
+        <h1 class="section-title">Classification<span>Result</span></h1>
+      </div>
+      <div class="output"> 
+        <table id="customers">
+            
+            <tr>
+              <th><p style="color: white;">Target Output: <span> {{targetc}}</span></p></th>
+               <th> <audio id="audio" controls><source src="{{audiofile}}" id="src" /></audio></th>
+            </tr>
+            <tr>
+              <th><p style="color: white;">Classifications</p></th>
+              <th><p><span style="color: white;">Accuracy</span></p></th>
+            </tr>
+            <tr>
+              <td><p>{{prediction_text}}</p> </td>
+              <td> <p><span>{{ percent_text }} </span></p></td>
+            </tr>
+            <tr>
+              <td><p>{{prediction_text2}}</p> </td>
+              <td> <p><span>{{ percent_text2}} </span></p></td>
 
-    <table id="customers">
+            </tr>
+            <tr>
+              <td><p>{{prediction_text3}}</p> </td>
+              <td> <p><span>{{ percent_text3 }} </span></p></td>
+            </tr>
+            <tr>
+              <td><p>{{prediction_text4}}</p> </td>
+              <td> <p><span>{{ percent_text4 }} </span></p></td>
+            </tr>
+            <tr>
+              <td><p>{{prediction_text5}}</p> </td>
+              <td> <p><span>{{ percent_text5 }} </span></p></td>
+            </tr>
+     
+          </table>
+        </div>
 
-      <tr>
-        <td style="background-color: #29323c;"><p><label class ="label" for="technique">Select the bowing technique you are gonna input from the menu</label></p> </td>
-        <td><p><span> <input list="techniques" name="technique" id="technique" required placeholder="TECHNIQUES"> </span></p></td>
-      </tr>
-      <tr>
-        <td style="background-color:#29323c;"><p style="color: #D67D3E;font-size: 1.7rem;
-          margin-top: 5px;
-          line-height: 2.5rem;
-          font-weight: 300;
-          letter-spacing: 0.05rem;">Upload your recording by clicking the "input audio" button  <label class = "button" for="file">Input Audio </label></p> </td>
-        <td> <p><span><audio id="audio" controls><source src="" id="src" />
-        </audio></span></p></td>
-      </tr>
-
-    </table>
-    <input type="file" name="UploadedAudio" accept=".ogg,.wav,.flac,.mp3" style="display: none;" id="file"  onchange="readFile(this.files);"/>
-
-   <center><button type="submit" class="subBtn" id="subBtn" disabled onsubmit="myFunction()"> Classify</button></center>
-  </form>
-
-    {% if umessage != "" %}
-
-    <p style="padding:10px;background-color:pink;color:red;">{{ umessage }}</p>
-
-    {% endif %}
-
-
-
-
-
+        <a href = "/predict" class="subBtn">Try Again</a>
   </div>
-
 </section>
 
- <datalist id="techniques">
-   <option value="DETACHE">
-   <option value="CHORDS">
-   <option value="SON FILE">
-   <option value="PORTATO">
-   <option value="LEGATO">
- </datalist>
 
 
 
@@ -129,9 +123,7 @@
 
 
 
-
-
-<script src="static/predict.js"></script>
+<script src="static/output.js"></script>
 
 
 

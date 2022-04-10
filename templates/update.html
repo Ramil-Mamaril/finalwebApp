@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="static/update.css">
+  <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
   <title></title>
 </head>
 <body>
@@ -13,7 +14,7 @@
     <div class="header container">
       <div class="nav-bar">
         <div class="brand">
-         <a href="/landingpage">
+          <a href="/landingpage">
             <h1><span>V</span>iolin <span>I</span>o</h1>
           </a>
         </div>
@@ -40,53 +41,57 @@
   </section>
 
 
- <section id="projects">
-    <div class="projects container ">
-      <div class="logincontainer right-panel-active" id="container">
-        <div class="form-container sign-up-container">
-            <form action="/profileupdate" method="post" enctype="multipart/form-data">
-              <h1 class="loginh1">Update Profile Picture</h1>
-                <div class="center">
-                  <div class="form-input">
-                    <div class="preview">
-                      <img id="file-ip-1-preview">
-                    </div>
-                    <label for="file-ip-1">Upload Image</label>
-                    <input type="file" name ="avatar"id="file-ip-1" accept="image/*" onchange="showPreview(event);">
-                    <button class="loginbutton">Change Profile</button>
-                  </div>
-                </div>
+<section id="projects">
+    <div class="projects container">
+  <div class="logincontainer" id="container">
+    <div class="form-container sign-up-container">
+      <form action="/profileupdate" method="post" enctype="multipart/form-data">
+        <h1 class="loginh1">Update Profile Picture</h1>
+          <div class="center">
+            <div class="form-input">
 
-            </form>
-        </div>
-        <div class="overlay-container">
-          <div class="overlay">
-            <div class="overlay-panel overlay-left">
-              <form action="/update" method="post" enctype="multipart/form-data" style="  background-color:#29323c;" >
-                <h1 class="loginh1">Update Acc Information </h1>
-                <div class="center">
+                <img src=" {{image}} " id="file-ip-1-preview"style="vertical-align: top; height: 200px; border-radius: 22px;">
 
-                    <input type="username" required placeholder="First Name" name="username" />
-                    <input type="username" required placeholder="Last Name" name="lastname" />
-                    <button class="loginbutton">Change Profile</button>
-
-                </div>
-              </form>
+              <label for="file-ip-1">Upload New Picture</label>
+              <input type="file" name ="avatar"id="file-ip-1" accept="image/*" onchange="showPreview(event);">
+              <button class="sbutton" id="changeP" style="display:none;">Change Profile</button>
             </div>
-
           </div>
+
+      </form>
+    </div>
+    <div class="form-container sign-in-container">
+      <form action="/update" method="post" enctype="multipart/form-data" >
+        <h1 class="loginh1">Update Account Information </h1>
+        <div class="center">
+
+            <input type="username" required placeholder="First Name" name="username" />
+            <input type="username" required placeholder="Last Name" name="lastname" />
+            <button class="sbutton">Change Name</button>
+
         </div>
+      </form>
+    </div>
+    <div class="overlay-container">
+      <div class="overlay">
+        <div class="overlay-panel overlay-left">
+          <h1 class="loginh1">Hello, {{name}}</h1>
+          <p class="loginp">Change and update your personal information here</p>
+          <button class="loginbutton ghost" id="signIn">Sign In</button>
+        </div>
+        <div class="overlay-panel overlay-right">
+          <h1 class="loginh1">Hello, {{name}}</h1>
+          <p class="loginp">Upload and change your profile picture here</p>
+          <button class="loginbutton ghost" id="signUp">Change Profile Picture</button>
+        </div>
+      </div>
     </div>
   </div>
-  <div class = "warning" style =" color: red; background-color: white;
-padding: 10px;
-font-size:1.5rem;">
-                    {% if umessage %}
+    {% if umessage %}
 
-                        {{ umessage }}
+    <p style="padding:10px;background-color:pink;color:red;">{{ umessage }}</p>
 
-                    {% endif %}
-                </div>
+   {% endif %}
   </div>
 </section>
 <section id="footer">

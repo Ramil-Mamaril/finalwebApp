@@ -199,6 +199,18 @@ def technique():
     print(person["image"])
     return render_template("technique.html", email=person["email"], name=person["name"],image=person["image"])
 
+@app.route('/detache')
+def detache():
+    global person
+    person["is_logged_in"] = True
+    person["uid"] = person["uid"]
+    # Get the name of the user
+    print(person["uid"])
+    data = db.child("users").get()
+    person["image"] = data.val()[person["uid"]]["image"]
+    print(person["image"])
+    return render_template("detache.html",email = person["email"] ,name = person["name"],image=person["image"])
+
 @app.route('/profile')
 def profile():
     person["is_logged_in"] = True

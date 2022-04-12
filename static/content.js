@@ -23,3 +23,10 @@ menu_item.forEach((item) => {
     mobile_menu.classList.toggle('active');
   });
 });
+
+//Technique Narrative
+var txtBtn = document.getElementById("txtBtn");
+
+txtBtn.onClickListener = function textClick() {
+  window.location.href="/templates/Detache.html"
+}

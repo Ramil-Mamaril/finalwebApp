@@ -220,7 +220,7 @@ p {
   display: inline-block;
   color: black;
   padding: 25px 80px 25px 80px;
-  margin: 100px 0px 50px 0px;
+  margin: 100px 0px 30px 0px;
   text-transform: uppercase;
   letter-spacing: 0.2rem;
   text-align: center;
@@ -233,6 +233,7 @@ p {
   margin-right: auto;
   text-size-adjust: auto;
   padding: 25px 80px 25px 80px;
+
   /*width: 80em;*/
   display: inline-block;
   align-items: center;
@@ -240,14 +241,22 @@ p {
 }
 #content .content-main p{
   font-size: 2.5em;
+  margin: 20px 0px 40px 0px;
   letter-spacing: 0.025em;
-  margin-top: 10px;
   float: left;
 }
 #content .content-image {
-    height: 300px;
+    height: 75%;
+    width: 75%;
     margin: 20px 20px 20px 20px;
+    padding: 20px 80px 20px 80px;
     position: relative;
+}
+#content .content-image-2 {
+    height: 50%;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
 }
 /* End Content Section */
 

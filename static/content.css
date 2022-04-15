@@ -258,6 +258,9 @@ p {
     margin-left: auto;
     margin-right: auto;
 }
+#content .content-source hr{
+  padding: 0px 20px 0px 20px
+}
 /* End Content Section */
 
 /* Footer */

@@ -1,5 +1,5 @@
 import pyrebase
-from flask import Flask, render_template, request, redirect,url_for
+from flask import Flask, render_template, request, redirect, url_for
 from tensorflow.keras.models import load_model
 import numpy as np
 import os
@@ -31,8 +31,10 @@ firebase = pyrebase.initialize_app(config)
 auth = firebase.auth()
 storage = firebase.storage()
 db = firebase.database()
-person = {"is_logged_in": False, "name": "","lastname":"", "email": "", "uid": "", "image": "","technique":"","predicted":"","predicted1":"","predicted2":"","predicted3":"","predicted4":"","percent":"","percent1":"","percent2":"","percent3":"","percent4":""}
+person = {"is_logged_in": False, "name": "", "lastname": "", "email": "", "uid": "", "image": "", "technique": "", "predicted": "", "predicted1": "",
+          "predicted2": "", "predicted3": "", "predicted4": "", "percent": "", "percent1": "", "percent2": "", "percent3": "", "percent4": ""}
 gUid = ""
+
 
 @app.route('/')
 def land():
@@ -41,7 +43,7 @@ def land():
     return render_template('/land.html')
 
 
-@app.route('/login',methods=['GET', 'POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     if (request.method == 'POST'):
         result = request.form
@@ -72,13 +74,14 @@ def login():
         else:
             return render_template('login.html')
 
+
 @app.route('/create', methods=['GET', 'POST'])
 def create():
     if (request.method == 'POST'):
         result = request.form
         email = result['email']
         password = result['password']
-        name= result['username']
+        name = result['username']
         lastname = result['lname']
         image = "static/img/default.png"
         try:
@@ -93,17 +96,24 @@ def create():
             person["email"] = user["email"]
             person["uid"] = user["localId"]
             person["name"] = name
-            person["image"]= image
-            person["lastname"] =lastname
+            person["image"] = image
+            person["lastname"] = lastname
             storage.child("users").child(person["uid"]).put(image)
-            imageUrl = storage.child("users").child(person["uid"]).get_url(person["uid"])
-            data = {"name": name,"lastname":lastname, "email": email,"image":imageUrl}
-            predData={"predicted":"","predicted1":"","predicted2":"","predicted3":"","predicted4":"","percent":"","percent1":"","percent2":"","percent3":"","percent4":"","technique":""}
+            imageUrl = storage.child("users").child(
+                person["uid"]).get_url(person["uid"])
+            data = {"name": name, "lastname": lastname,
+                    "email": email, "image": imageUrl}
+            predData = {"predicted": "", "predicted1": "", "predicted2": "", "predicted3": "", "predicted4": "",
+                        "percent": "", "percent1": "", "percent2": "", "percent3": "", "percent4": "", "technique": ""}
             db.child("users").child(person["uid"]).set(data)
-            db.child("users").child(person["uid"]).child("Detache").set(predData)
-            db.child("users").child(person["uid"]).child("Portato").set(predData)
-            db.child("users").child(person["uid"]).child("Legato").set(predData)
-            db.child("users").child(person["uid"]).child("SonFile").set(predData)
+            db.child("users").child(person["uid"]).child(
+                "Detache").set(predData)
+            db.child("users").child(person["uid"]).child(
+                "Portato").set(predData)
+            db.child("users").child(person["uid"]).child(
+                "Legato").set(predData)
+            db.child("users").child(person["uid"]).child(
+                "SonFile").set(predData)
             db.child("users").child(person["uid"]).child("Chord").set(predData)
             return redirect(url_for('login'))
         except:
@@ -113,22 +123,21 @@ def create():
         if person["is_logged_in"] == True:
             return render_template("landingpage.html")
         else:
-            return  render_template("login.html")
-
-
+            return render_template("login.html")
 
        # user = auth.create_user_with_email_and_password(email, password)
        # newUser = (user['localId'])
        # db.child(newUser).push(username)
-        #return render_template('login.html')
-    #return render_template('register.html')
+        # return render_template('login.html')
+    # return render_template('register.html')
 
-@app.route('/update',methods=['GET', 'POST'])
+
+@app.route('/update', methods=['GET', 'POST'])
 def update():
     if (request.method == 'POST'):
         result = request.form
         name = result['username']
-        lastname =result['lastname']
+        lastname = result['lastname']
         try:
             # Add data to global person
             global person
@@ -147,10 +156,12 @@ def update():
             person["uid"] = person["uid"]
             data = db.child("users").get()
             person["image"] = data.val()[person["uid"]]["image"]
-            return render_template("update.html",name=person["name"],image=person["image"])
+            return render_template("update.html", name=person["name"], image=person["image"])
         else:
             return render_template("update.html")
-@app.route('/profileupdate',methods=['GET', 'POST'])
+
+
+@app.route('/profileupdate', methods=['GET', 'POST'])
 def profileupdate():
     if (request.method == 'POST'):
         image = request.files["avatar"]
@@ -160,7 +171,8 @@ def profileupdate():
             person['is_logged_in'] = True
             print(image)
             storage.child("users").child(person["uid"]).put(image)
-            imageUrl = storage.child("users").child(person["uid"]).get_url(person["uid"])
+            imageUrl = storage.child("users").child(
+                person["uid"]).get_url(person["uid"])
             print(imageUrl)
             data = {"image": imageUrl}
             db.child("users").child(person["uid"]).update(data)
@@ -170,9 +182,10 @@ def profileupdate():
             return render_template('update.html', umessage=unsuccessful)
     else:
         if person["is_logged_in"] == True:
-            return render_template("update.html",email = person["email"] ,name = person["name"])
+            return render_template("update.html", email=person["email"], name=person["name"])
         else:
             return render_template("update.html")
+
 
 @app.route('/landingpage')
 def landingpage():
@@ -184,7 +197,7 @@ def landingpage():
     data = db.child("users").get()
     person["image"] = data.val()[person["uid"]]["image"]
     print(person["image"])
-    return render_template("landingpage.html",email = person["email"] ,name = person["name"],image=person["image"])
+    return render_template("landingpage.html", email=person["email"], name=person["name"], image=person["image"])
 
 
 @app.route('/technique')
@@ -197,7 +210,8 @@ def technique():
     data = db.child("users").get()
     person["image"] = data.val()[person["uid"]]["image"]
     print(person["image"])
-    return render_template("technique.html", email=person["email"], name=person["name"],image=person["image"])
+    return render_template("technique.html", email=person["email"], name=person["name"], image=person["image"])
+
 
 @app.route('/detache')
 def detache():
@@ -209,14 +223,41 @@ def detache():
     data = db.child("users").get()
     person["image"] = data.val()[person["uid"]]["image"]
     print(person["image"])
-    return render_template("detache.html",email = person["email"] ,name = person["name"],image=person["image"])
+    return render_template("detache.html", email=person["email"], name=person["name"], image=person["image"])
+
+
+@app.route('/chord')
+def detache():
+    global person
+    person["is_logged_in"] = True
+    person["uid"] = person["uid"]
+    # Get the name of the user
+    print(person["uid"])
+    data = db.child("users").get()
+    person["image"] = data.val()[person["uid"]]["image"]
+    print(person["image"])
+    return render_template("chord.html", email=person["email"], name=person["name"], image=person["image"])
+
+
+@app.route('/legato')
+def detache():
+    global person
+    person["is_logged_in"] = True
+    person["uid"] = person["uid"]
+    # Get the name of the user
+    print(person["uid"])
+    data = db.child("users").get()
+    person["image"] = data.val()[person["uid"]]["image"]
+    print(person["image"])
+    return render_template("legato.html", email=person["email"], name=person["name"], image=person["image"])
+
 
 @app.route('/profile')
 def profile():
     person["is_logged_in"] = True
     person["uid"] = person["uid"]
     person["name"] = person["name"]
-    person["lastname"]=person["lastname"]
+    person["lastname"] = person["lastname"]
     person["email"] = person["email"]
     person["percent"] = person["percent"]
     person["percent1"] = person["percent1"]
@@ -229,18 +270,17 @@ def profile():
     person["predicted3"] = person["predicted3"]
     person["predicted4"] = person["predicted4"]
 
-
     # Get the name of the user
 
     data = db.child("users").get()
     person["image"] = data.val()[person["uid"]]["image"]
-    #DETACHE
+    # DETACHE
     predictData = db.child("users").child(person["uid"]).child("Detache").get()
     dpredict = predictData.val()["predicted"]
     dpredict1 = predictData.val()["predicted1"]
     dpredict2 = predictData.val()["predicted2"]
     dpredict3 = predictData.val()["predicted3"]
-    dpredict4  = predictData.val()["predicted4"]
+    dpredict4 = predictData.val()["predicted4"]
     dpercent = predictData.val()["percent"]
     dpercent1 = predictData.val()["percent1"]
     dpercent2 = predictData.val()["percent2"]
@@ -263,7 +303,8 @@ def profile():
     ctechnique = predictData1.val()["technique"]
 
     # portato
-    predictData2 = db.child("users").child(person["uid"]).child("Portato").get()
+    predictData2 = db.child("users").child(
+        person["uid"]).child("Portato").get()
     ppredict = predictData2.val()["predicted"]
     ppredict1 = predictData2.val()["predicted1"]
     ppredict2 = predictData2.val()["predicted2"]
@@ -291,7 +332,8 @@ def profile():
     ltechnique = predictData3.val()["technique"]
 
     # SONFILE
-    predictData4 = db.child("users").child(person["uid"]).child("SonFile").get()
+    predictData4 = db.child("users").child(
+        person["uid"]).child("SonFile").get()
     spredict = predictData4.val()["predicted"]
     spredict1 = predictData4.val()["predicted1"]
     spredict2 = predictData4.val()["predicted2"]
@@ -304,42 +346,26 @@ def profile():
     spercent4 = predictData4.val()["percent4"]
     stechnique = predictData4.val()["technique"]
 
-    return render_template("profile.html", email=person["email"], name=person["name"],lastname=person["lastname"],image=person["image"],
-                          dtechnique=dtechnique,dpredict=dpredict,dpredict1=dpredict1,dpredict2=dpredict2
-                           ,dpredict3=dpredict3,dpredict4=dpredict4,dpercent=dpercent
-                           ,dpercent1=dpercent1,dpercent2=dpercent2,dpercent3=dpercent3
-                           ,dpercent4=dpercent4,stechnique=stechnique,spredict=spredict,spredict1=spredict1,spredict2=spredict2
-                           ,spredict3=spredict3,spredict4=spredict4,spercent=spercent
-                           ,spercent1=spercent1,spercent2=spercent2,spercent3=spercent3
-                           ,spercent4=spercent4,ptechnique=ptechnique,ppredict=ppredict,ppredict1=ppredict1,ppredict2=ppredict2
-                           ,ppredict3=ppredict3,ppredict4=ppredict4,ppercent=ppercent
-                           ,ppercent1=ppercent1,ppercent2=ppercent2,ppercent3=ppercent3
-                           ,ppercent4=ppercent4,ltechnique=ltechnique,lpredict=lpredict,lpredict1=lpredict1,lpredict2=lpredict2
-                           ,lpredict3=lpredict3,lpredict4=lpredict4,lpercent=lpercent
-                           ,lpercent1=lpercent1,lpercent2=lpercent2,lpercent3=lpercent3
-                           ,lpercent4=lpercent4,ctechnique=ctechnique,cpredict=cpredict,cpredict1=cpredict1,cpredict2=cpredict2
-                           ,cpredict3=cpredict3,cpredict4=cpredict4,cpercent=cpercent
-                           ,cpercent1=cpercent1,cpercent2=cpercent2,cpercent3=cpercent3
-                           ,cpercent4=cpercent4,technique=technique)
+    return render_template("profile.html", email=person["email"], name=person["name"], lastname=person["lastname"], image=person["image"],
+                           dtechnique=dtechnique, dpredict=dpredict, dpredict1=dpredict1, dpredict2=dpredict2, dpredict3=dpredict3, dpredict4=dpredict4, dpercent=dpercent, dpercent1=dpercent1, dpercent2=dpercent2, dpercent3=dpercent3, dpercent4=dpercent4, stechnique=stechnique, spredict=spredict, spredict1=spredict1, spredict2=spredict2, spredict3=spredict3, spredict4=spredict4, spercent=spercent, spercent1=spercent1, spercent2=spercent2, spercent3=spercent3, spercent4=spercent4, ptechnique=ptechnique, ppredict=ppredict, ppredict1=ppredict1, ppredict2=ppredict2, ppredict3=ppredict3, ppredict4=ppredict4, ppercent=ppercent, ppercent1=ppercent1, ppercent2=ppercent2, ppercent3=ppercent3, ppercent4=ppercent4, ltechnique=ltechnique, lpredict=lpredict, lpredict1=lpredict1, lpredict2=lpredict2, lpredict3=lpredict3, lpredict4=lpredict4, lpercent=lpercent, lpercent1=lpercent1, lpercent2=lpercent2, lpercent3=lpercent3, lpercent4=lpercent4, ctechnique=ctechnique, cpredict=cpredict, cpredict1=cpredict1, cpredict2=cpredict2, cpredict3=cpredict3, cpredict4=cpredict4, cpercent=cpercent, cpercent1=cpercent1, cpercent2=cpercent2, cpercent3=cpercent3, cpercent4=cpercent4, technique=technique)
 
 
 @app.route('/predict')
 def predict():
 
-        global person
-        person["is_logged_in"] = True
-        person["uid"] = person["uid"]
-        person["name"] = person["name"]
-        person["email"] = person["email"]
-        # Get the name of the user
+    global person
+    person["is_logged_in"] = True
+    person["uid"] = person["uid"]
+    person["name"] = person["name"]
+    person["email"] = person["email"]
+    # Get the name of the user
 
-        data = db.child("users").get()
-        person["image"] = data.val()[person["uid"]]["image"]
+    data = db.child("users").get()
+    person["image"] = data.val()[person["uid"]]["image"]
 
-        sad = ""
+    sad = ""
 
-
-        return render_template("predict.html", email=person["email"], name=person["name"],image=person["image"],umessage=sad)
+    return render_template("predict.html", email=person["email"], name=person["name"], image=person["image"], umessage=sad)
 
 
 @app.route('/pred', methods=['POST'])
@@ -378,14 +404,17 @@ def pred():
         num_segments = 6
 
         samples_per_segment = int(SAMPLES_PER_TRACK / num_segments)
-        num_mfcc_vectors_per_segment = math.ceil(samples_per_segment / hop_length)
-        signal, sample_rate = librosa.load(filename, sr=SAMPLE_RATE, res_type='kaiser_fast')
+        num_mfcc_vectors_per_segment = math.ceil(
+            samples_per_segment / hop_length)
+        signal, sample_rate = librosa.load(
+            filename, sr=SAMPLE_RATE, res_type='kaiser_fast')
 
         for d in range(num_segments):
             start = samples_per_segment * d
             finish = start + samples_per_segment
 
-        mfccs = librosa.feature.mfcc(signal[start:finish], sample_rate, n_mfcc=num_mfcc, n_fft=n_fft, hop_length=hop_length)
+        mfccs = librosa.feature.mfcc(
+            signal[start:finish], sample_rate, n_mfcc=num_mfcc, n_fft=n_fft, hop_length=hop_length)
         mfccs = mfccs.T
 
         mfccs.shape
@@ -469,8 +498,7 @@ def pred():
         prediction_message4 = print_message5
 
         outputArray = [(prediction_message, percent_message), (prediction_message1, percent_message2),
-                       (prediction_message2, percent_message3)
-            , (prediction_message3, percent_message4), (prediction_message4, percent_message5)]
+                       (prediction_message2, percent_message3), (prediction_message3, percent_message4), (prediction_message4, percent_message5)]
         print(outputArray)
         global person
         person["is_logged_in"] = True
@@ -495,7 +523,8 @@ def pred():
                     "predicted3": prediction_message3, "predicted4": prediction_message4, "percent": percent_message,
                     "percent1": percent_message2, "percent2": percent_message3, "percent3": percent_message4,
                     "percent4": percent_message5, "technique": Desire}
-            db.child("users").child(person["uid"]).child("Detache").update(data)
+            db.child("users").child(person["uid"]).child(
+                "Detache").update(data)
         elif Desire == "CHORDS":
             data = {"predicted": prediction_message, "predicted1": prediction_message1, "predicted2": prediction_message2,
                     "predicted3": prediction_message3, "predicted4": prediction_message4, "percent": percent_message,
@@ -507,13 +536,15 @@ def pred():
                     "predicted3": prediction_message3, "predicted4": prediction_message4, "percent": percent_message,
                     "percent1": percent_message2, "percent2": percent_message3, "percent3": percent_message4,
                     "percent4": percent_message5, "technique": Desire}
-            db.child("users").child(person["uid"]).child("SonFile").update(data)
+            db.child("users").child(person["uid"]).child(
+                "SonFile").update(data)
         elif Desire == "PORTATO":
             data = {"predicted": prediction_message, "predicted1": prediction_message1, "predicted2": prediction_message2,
                     "predicted3": prediction_message3, "predicted4": prediction_message4, "percent": percent_message,
                     "percent1": percent_message2, "percent2": percent_message3, "percent3": percent_message4,
                     "percent4": percent_message5, "technique": Desire}
-            db.child("users").child(person["uid"]).child("Portato").update(data)
+            db.child("users").child(person["uid"]).child(
+                "Portato").update(data)
         elif Desire == "LEGATO":
             data = {"predicted": prediction_message, "predicted1": prediction_message1, "predicted2": prediction_message2,
                     "predicted3": prediction_message3, "predicted4": prediction_message4, "percent": percent_message,
@@ -529,7 +560,7 @@ def pred():
                                    audiofile="static/audio.wav", targetc=Desire)
     except:
         mensahe = "Invalid Input! User recordings should be 3 seconds for an optimal result"
-        return render_template("predict.html", email=person["email"], name=person["name"], image=person["image"],umessage=mensahe)
+        return render_template("predict.html", email=person["email"], name=person["name"], image=person["image"], umessage=mensahe)
     return render_template("output.html", prediction_text=prediction_message, prediction_text2=prediction_message1,
                            prediction_text3=prediction_message2, prediction_text4=prediction_message3,
                            prediction_text5=prediction_message4, percent_text=percent_message,

@@ -227,7 +227,7 @@ def detache():
 
 
 @app.route('/chord')
-def detache():
+def chords():
     global person
     person["is_logged_in"] = True
     person["uid"] = person["uid"]
@@ -240,7 +240,7 @@ def detache():
 
 
 @app.route('/legato')
-def detache():
+def legato():
     global person
     person["is_logged_in"] = True
     person["uid"] = person["uid"]
@@ -250,6 +250,32 @@ def detache():
     person["image"] = data.val()[person["uid"]]["image"]
     print(person["image"])
     return render_template("legato.html", email=person["email"], name=person["name"], image=person["image"])
+
+
+@app.route('/sonfile')
+def sonfile():
+    global person
+    person["is_logged_in"] = True
+    person["uid"] = person["uid"]
+    # Get the name of the user
+    print(person["uid"])
+    data = db.child("users").get()
+    person["image"] = data.val()[person["uid"]]["image"]
+    print(person["image"])
+    return render_template("son_file.html", email=person["email"], name=person["name"], image=person["image"])
+
+
+@app.route('/portato')
+def portato():
+    global person
+    person["is_logged_in"] = True
+    person["uid"] = person["uid"]
+    # Get the name of the user
+    print(person["uid"])
+    data = db.child("users").get()
+    person["image"] = data.val()[person["uid"]]["image"]
+    print(person["image"])
+    return render_template("portato.html", email=person["email"], name=person["name"], image=person["image"])
 
 
 @app.route('/profile')

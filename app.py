@@ -1,6 +1,7 @@
 import pyrebase
 from flask import Flask, render_template, request, redirect, url_for
-from tensorflow.keras.models import load_model
+from keras.models import load_model
+import tensorflow
 import numpy as np
 import os
 import librosa
@@ -10,9 +11,9 @@ import math
 app = Flask(__name__)
 
 
-model = load_model("model/Latest_Model.h5")
+model = load_model("model/Revised_Model_MFCC.h5")
 
-with open("json/Latest_Violin.json", "r") as fp:
+with open("json/violin_MFCC.json", "r") as fp:
     data = json.load(fp)
     z = np.array(data['mapping'])
 

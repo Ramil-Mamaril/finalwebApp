@@ -764,25 +764,24 @@ input[name="technique"] {
 
 
 #customers {
-
   border-collapse: collapse;
   width: 100%;
 }
 
 #customers td, #customers th {
-  border: 1px solid #ddd;
+  
   padding: 1px;
+  text-align: center;
+  vertical-align: middle;
 }
 
-#customers tr:nth-child(even){background-color: #f2f2f2;}
 
-#customers tr:hover {background-color: #ddd;}
+
+
 
 #customers th {
   padding: 1px;
    background-color: #29323c;
-  
-
 }
 
 .change{
@@ -800,5 +799,6 @@ input[name="technique"] {
   }
   
   .output p span{
-    color: #D67D3E;
+    font-weight:bold;
+
   }

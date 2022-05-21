@@ -55,8 +55,6 @@ function readFile(files) {
 		var fileReader = new FileReader();
 			fileReader.readAsArrayBuffer(files[0]);
 			fileReader.onload = function(e) {
-				playAudioFile(e.target.result);
-				console.log(("Filename: '" + files[0].name + "'"), ( "(" + ((Math.floor(files[0].size/1024/1024*100))/100) + " MB)" ));
 				button.style.cursor = "pointer";
 				button.disabled = false;
 				button.style.display = "inline-block";

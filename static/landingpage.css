@@ -229,7 +229,7 @@ p {
 
 /* Hero Section */
 #hero {
-  background-image: url(img/back.jpg);
+  background-image: url(/static/img/back.jpg);
   background-size: cover;
   background-position: top center;
   position: relative;
@@ -792,11 +792,8 @@ p {
     font-size: 1.8rem;
   }
   #header .nav-list ul a:after {
-    display: none;  
+    display: none;
   }
-
- 
-  
   /* End header */
 
   #services .service-bottom .service-item {
@@ -805,15 +802,17 @@ p {
   }
 
 
-  
+
 }
+
+
 
 
 li a, .dropbtn {
   display: inline-block;
-  font-size: .4rem;
-  text-align: left;
-  padding: 2px 5px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
   text-decoration: none;
 }
 
@@ -834,11 +833,10 @@ li.dropdown {
 
 .dropdown-content a {
   color: black;
-  padding: 5px 5px;
+  padding: 12px 16px;
   text-decoration: none;
   display: block;
   text-align: left;
-  font-size: 5px;
 }
 
 .dropdown-content a:hover {background-color: #f1f1f1;}
@@ -846,4 +844,3 @@ li.dropdown {
 .dropdown:hover .dropdown-content {
   display: block;
 }
-

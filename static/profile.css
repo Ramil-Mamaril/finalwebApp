@@ -44,7 +44,7 @@ p {
   margin-bottom: 10px;
   text-transform: uppercase;
   letter-spacing: 0.2rem;
-  text-align: center;
+  text-align: left;
 }
 .section-title span {
   color: #D67D3E;
@@ -54,10 +54,8 @@ p {
   display: inline-block;
   padding: 10px 30px;
   color: white;
-  background-color: transparent;
-  border: 2px solid #D67D3E;
-  border-radius: 50px;
-  font-size: 2rem;
+  background-color: #29323c;
+  font-size: 1.5rem;
   text-transform: uppercase;
   letter-spacing: 0.1rem;
   margin-top: 30px;
@@ -73,6 +71,79 @@ p {
 .brand h1 span {
   color: #D67D3E;
 }
+/* Projects section */
+#projects .projects {
+  flex-direction: column;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 100px 0;
+}
+#projects .projects-header h1 {
+  margin-bottom: 50px;
+}
+#projects .all-projects {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+#projects .project-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 80%;
+  margin: 20px auto;
+  overflow: hidden;
+  border-radius: 10px;
+}
+#projects .project-info {
+  padding: 30px;
+  flex-basis: 50%;
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
+  color: white;
+}
+#projects .project-info h1 {
+  font-size: 4rem;
+  font-weight: 500;
+}
+#projects .project-info h2 {
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin-top: 10px;
+}
+#projects .project-info p {
+  color: white;
+}
+#projects .project-img {
+  flex-basis: 50%;
+  height: 300px;
+  overflow: hidden;
+  position: relative;
+}
+#projects .project-img:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
+  opacity: 0.7;
+}
+#projects .project-img img {
+  transition: 0.3s ease transform;
+}
+#projects .project-item:hover .project-img img {
+  transform: scale(1.1);
+}
+/* End Projects section */
+
 
 /* Header   section */
 #header {
@@ -215,7 +286,7 @@ p {
 #about .about {
   flex-direction: column-reverse;
   text-align: center;
-  max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
   padding: 100px 20px;
 }
@@ -225,6 +296,7 @@ p {
 }
 #about .col-right {
   width: 100%;
+
 }
 #about .col-right h2 {
   font-size: 1.8rem;
@@ -246,10 +318,11 @@ p {
   width: 100%;
   position: relative;
   border: 10px #D67D3E;
+
 }
 
 #about .col-left .about-img::after {
-
+display:none
 }
 
 #about .col-left .about-iframe::after {
@@ -352,8 +425,8 @@ p {
 /* Media Query For Tablet */
 @media only screen and (min-width: 768px) {
   .cta {
-    font-size: 2.5rem;
-    padding: 20px 60px;
+    font-size: 1.5rem;
+    padding: 10px 10px;
   }
   h1.section-title {
     font-size: 6rem;
@@ -376,6 +449,7 @@ p {
     height: 98%;
     width: 98%;
     border: 10px solid #D67D3E;
+
   }
   #about .col-right {
     text-align: left;
@@ -385,6 +459,27 @@ p {
     text-align: left;
   }
   /* End About */
+
+  /* Project */
+  #projects .project-item {
+    flex-direction: row;
+  }
+  #projects .project-item:nth-child(even) {
+    flex-direction: row-reverse;
+  }
+  #projects .project-item {
+    height: 400px;
+    margin: 0;
+    width: 100%;
+    border-radius: 0;
+  }
+  #projects .all-projects .project-info {
+    height: 100%;
+  }
+  #projects .all-projects .project-img {
+    height: 100%;
+  }
+  /* End Project */
 
 }
 /* End Media Query For Tablet */
@@ -485,20 +580,20 @@ li.dropdown {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.2s ease-out;
-  background-color: #f1f1f1;
+  background-color: #fff;
 }
 .active, .collapsible:hover {
-  background-color: #D67D3E;
+  background-color: #29323c;
 }
 .collapsible:after {
-  content: '\002B';
+  content: '\2190';
   color: white;
   font-weight: bold;
   float: right;
 }
 
 .active:after {
-  content: "\2212";
+  content: "\2193";
 }
 .output p{
   font-size:2rem;
@@ -511,7 +606,6 @@ li.dropdown {
 
 
   #customers {
-
     border-collapse: collapse;
     width: 100%;
   }
@@ -531,5 +625,124 @@ li.dropdown {
 
     color: white;
   }
+
+
+/* Create two unequal columns that floats next to each other */
+.column {
+  float: left;
+  padding: 10px;
+
+}
+
+.left {
+  width: 70%;
+  height: 100%;
+}
+
+.right {
+  width: 30%;
+  height: 100%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 100%;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.containercard{
+  padding: 2px 16px;
+}
+
+.scolumn {
+  float: left;
+  width: 50%;
+  padding: 10px;
+  height: auto;
+}
+.srow
+{
+width:100%;
+    background:#E3F1FF;
+  border:2px;
+  border-style: solid;
+  border-color:#29323c;
+
+  border-radius:20px
+
+}
+/* Clear floats after the columns */
+.srow:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .scolumn {
+    width: 100%;
+  }
+  .column{
+width:100%}
+}
+
+
+.chartMenu {
+        width: 100%;
+        height: 40px;
+        background: #1A1A1A;
+        color: rgba(255, 26, 104, 1);
+      }
+      .chartMenu p {
+        padding: 10px;
+        font-size: 20px;
+      }
+      .chartCard {
+        width: 100%;
+        height:50%;
+        background: rgba(255, 26, 104, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .chartBox {
+        width:100%;
+        padding: 20px;
+        border-radius: 20px;
+        border: solid 3px rgba(255, 26, 104, 1);
+        background: white;
+      }
+
+      .about-img canvas{
+            width:100% !important;
+            height:100% !important;
+
+      }
+
+canvas label{
+    font-size: 20px;
+}
+.scolumn img{
+    width:100px;
+    float:left
+}
+
+.cimg img{
+    width:150px !important;
+    height:150px !important;
+   object-fit: cover;
+}
+
 
 

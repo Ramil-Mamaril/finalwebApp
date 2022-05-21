@@ -501,8 +501,8 @@ p {
   font-weight: 500;
   border: none;
   outline: none;
-  background: #fff;
-  color: #2c2c2c;
+  background: #29323c;
+  color: #fff;
   border-radius: 5px;
   cursor: pointer;
   text-align: center;
@@ -524,7 +524,7 @@ p {
   text-align: center;
   text-decoration: none;
   display: none;
-  width: 50%;
+
 
 }
 
@@ -714,7 +714,7 @@ input[name="technique"] {
 
   font-weight: 300;
   font-style: bold;
-  color:#D67D3E ;
+  color:black ;
 }
 
 .collapsible {

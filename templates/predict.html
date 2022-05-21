@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="static/predict.css">
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 
-  <title>Real-time Classification</title>
+  <title>My Website</title>
 </head>
 
 <body>
@@ -27,7 +27,7 @@
           <ul>
             <li><a href="/landingpage" >Home</a></li>
             <li><a href="/technique" >Learn</a></li>
-            <li><a href="/predict" class="active">Real Time Classification</a></li>
+            <li><a href="/predict" class="active">Technique Classifier</a></li>
             <li class="dropdown">
               <a href="/profile" class="dropbtn"> {{name}} <img src=" {{image}} " alt="profile_img" style="vertical-align: top; height: 25px;width: 40px; border-radius: 22px;"></a>
               <div class="dropdown-content">
@@ -54,15 +54,19 @@
     <table id="customers">
 
       <tr>
-        <td style="background-color: #29323c;"><p><label class ="label" for="technique">Select the bowing technique you are gonna input from the menu</label></p> </td>
-        <td><p><span> <input list="techniques" name="technique" id="technique" required placeholder="TECHNIQUES"> </span></p></td>
-      </tr>
-      <tr>
-        <td style="background-color:#29323c;"><p style="color: #D67D3E;font-size: 1.7rem;
+        <td style="background-color: #fff;"><p style="color: black;font-size: 1.7rem;
           margin-top: 5px;
           line-height: 2.5rem;
           font-weight: 300;
-          letter-spacing: 0.05rem;">Upload your recording by clicking the "input audio" button  <label class = "button" for="file">Input Audio </label></p> </td>
+          letter-spacing: 0.05rem;"><label class ="label" for="technique">Select the bowing technique you are gonna input from the menu</label></p> </td>
+        <td><p><span> <input list="techniques" name="technique" id="technique" required placeholder="TECHNIQUES"> </span></p></td>
+      </tr>
+      <tr>
+        <td style="background-color:#fff;"><p style="color: black;font-size: 1.7rem;
+          margin-top: 5px;
+          line-height: 2.5rem;
+          font-weight: 300;
+          letter-spacing: 0.05rem;">Upload your 3 seconds recording by clicking the "input audio" button  <label class = "button" for="file">Input Audio </label></p> </td>
         <td> <p><span><audio id="audio" controls><source src="" id="src" />
         </audio></span></p></td>
       </tr>

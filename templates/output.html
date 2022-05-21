@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="static/output.css">
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 
-  <title>Classifications</title>
+  <title>My Website</title>
 </head>
 
 <body>
@@ -27,7 +27,7 @@
           <ul>
             <li><a href="/landingpage" >Home</a></li>
             <li><a href="/technique" >Learn</a></li>
-            <li><a href="/predict" class="active">Real Time Classification</a></li>
+            <li><a href="/predict" class="active">Technique Classifier</a></li>
             <li class="dropdown">
               <a href="/profile" class="dropbtn"> {{name}} <img src=" {{image}} " alt="profile_img" style="vertical-align: top; height: 25px;width: 40px; border-radius: 22px;"></a>
               <div class="dropdown-content">
@@ -48,43 +48,63 @@
     <div class="projects-header">
         <h1 class="section-title">Classification<span>Result</span></h1>
       </div>
-      <div class="output"> 
-        <table id="customers">
-            
-            <tr>
-              <th><p style="color: white;">Target Output: <span> {{targetc}}</span></p></th>
-               <th> <audio id="audio" controls><source src="{{audiofile}}" id="src" /></audio></th>
-            </tr>
-            <tr>
-              <th><p style="color: white;">Classifications</p></th>
-              <th><p><span style="color: white;">Accuracy</span></p></th>
-            </tr>
-            <tr>
-              <td><p>{{prediction_text}}</p> </td>
-              <td> <p><span>{{ percent_text }} </span></p></td>
-            </tr>
-            <tr>
-              <td><p>{{prediction_text2}}</p> </td>
-              <td> <p><span>{{ percent_text2}} </span></p></td>
+         <div class="output">
+          <table id="customers">
+              <tr>
+                <th colspan="5"><p style="color: white;">Target Output: <span> {{targetc}}</span></p></th>
+              </tr>
+              <tr>
+                <td><p style="font-weight:700;">{{prediction_text}}</p> </td>
+                <td><p style="font-weight:700;">{{prediction_text2}}</p> </td>
+                <td><p style="font-weight:700;">{{prediction_text3}}</p> </td>
+                <td ><p style="font-weight:700;">{{prediction_text4}}</p> </td>
+                <td><p style="font-weight:700;">{{prediction_text5}}</p> </td>
+              </tr>
+              <tr>
+                <td>
+                  <img src ="{{color}}" style="width: 60px;">
+                </td>
+                <td>
+                  <img src ="{{color1}}" style="width: 60px;">
+                </td>
+                <td>
+                  <img src ="{{color2}}" style="width: 60px;">
+                </td>
+                <td>
+                  <img src ="{{color3}}" style="width: 60px;">
+                </td>
+                <td>
+                  <img src ="{{color4}}" style="width: 60px;">
+                </td>
+              </tr>
 
-            </tr>
-            <tr>
-              <td><p>{{prediction_text3}}</p> </td>
-              <td> <p><span>{{ percent_text3 }} </span></p></td>
-            </tr>
-            <tr>
-              <td><p>{{prediction_text4}}</p> </td>
-              <td> <p><span>{{ percent_text4 }} </span></p></td>
-            </tr>
-            <tr>
-              <td><p>{{prediction_text5}}</p> </td>
-              <td> <p><span>{{ percent_text5 }} </span></p></td>
-            </tr>
-     
-          </table>
-        </div>
+            </table>
+          </div>
+        <table id = "customers" style="margin-top: 20px;">
+                <tr>
+                    <td>
+                      <table id="customer">
+                        <tr>
+                          <td><img src="https://i.ibb.co/1QZyrqm/green-removebg-preview.png" style="width: 60px;"></td>
+                          <td><p style="font-weight:700; text-align: left;"> indicates that the recording of the user is highly similar to the compared violin bowing technique</p></td>
+                        </tr>
+                        <tr>
+                          <td><img src="https://i.ibb.co/HqWfqMt/orange-removebg-preview.png" style="width: 60px;"></td>
+                          <td><p style="font-weight:700; text-align: left;"> indicates that the recording of the user is somewhat similar to the compared violin bowing technique</p></td>
+                        </tr>
+                        <tr>
+                          <td><img src="https://i.ibb.co/Lg02zh4/red-removebg-preview.png" style="width: 60px;"></td>
+                          <td><p style="font-weight:700; text-align: left;"> indicates that the recording of the user is nowhere to be compared on the violin bowing technique</p></td>
+                        </tr>
+                      </table>
+                    </td>
+                    <td>
+                      <audio id="audio" style="width:300px ; margin-bottom:15px;" controls><source src="{{audiofile}}" id="src" /></audio><br>
+                      <a href = "/predict" class="subBtn">Try Again</a>
+                    </td>
+                </tr>
+              </table>
 
-        <a href = "/predict" class="subBtn">Try Again</a>
   </div>
 </section>
 

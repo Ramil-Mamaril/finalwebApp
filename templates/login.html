@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="static/login.css">
-  <title>Log In or Sign Up</title>
+  <title></title>
 </head>
 <body>
 
@@ -41,7 +41,7 @@
             <input type="username" required placeholder="Firstname" name="username" />
             <input type="username" required placeholder="Lastname" name="lname" />
             <input type="email" placeholder="Email" name ="email" />
-            <input type="password" placeholder="Password" name="password" />
+            <input type="password" placeholder="Password (8 characters minimum):" minlength="8"  name="password" />
             <button class="loginbutton">Sign Up</button>
           </form>
         </div>
@@ -50,7 +50,7 @@
             <h1 class="loginh1">Sign in</h1>
             <input type="email" placeholder="Email" name = "email"/>
             <input type="password" placeholder="Password" name="password" />
-            <a class="logina" href="#">Forgot your password?</a>
+            <a style="margin-bottom:10px"   href="/change">Forgot Password?</a>
             <button class="loginbutton">Sign In</button>
           </form>
         </div>

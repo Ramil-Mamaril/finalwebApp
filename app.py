@@ -10,7 +10,7 @@ import math
 app = Flask(__name__)
 
 
-model = load_model("model/testviolin.h5")
+model = load_model("model/model.h5")
 
 with open("json/Latest_Violin.json", "r") as fp:
     data = json.load(fp)
